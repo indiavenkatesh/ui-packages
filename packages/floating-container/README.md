@@ -1,4 +1,4 @@
-# @lsq/floating-container
+# @indiavenkatesh/floating-container
 
 A framework-agnostic floating panel library. It owns the shell — position, size, drag, resize, and lifecycle — and never touches the content inside. Any framework (React, Preact, Vue, Angular, vanilla DOM) can render into the container by implementing a single `MountAdapter` interface.
 
@@ -27,7 +27,7 @@ A framework-agnostic floating panel library. It owns the shell — position, siz
 ## Installation
 
 ```bash
-npm install @lsq/floating-container
+npm install @indiavenkatesh/floating-container
 ```
 
 No external CSS file is required. The library injects its own styles into `<head>` automatically on first use.
@@ -37,7 +37,7 @@ No external CSS file is required. The library injects its own styles into `<head
 ## Quick Start
 
 ```ts
-import { FloatingContainer } from '@lsq/floating-container';
+import { FloatingContainer } from '@indiavenkatesh/floating-container';
 
 // 1. Create the container
 const container = new FloatingContainer({
@@ -269,12 +269,12 @@ Returns the raw `HTMLElement` that the adapter renders into.
 ```ts
 container.startDrag(x: number, y: number): void
 ```
-Programmatically begins a drag from viewport coordinates. Use this to relay a `PULSE_DRAG_START` `postMessage` from a cross-origin iframe header.
+Programmatically begins a drag from viewport coordinates. Use this to relay a `DRAG_START` `postMessage` from a cross-origin iframe header.
 
 ```ts
 // In the host page, listening to iframe messages:
 window.addEventListener('message', (e) => {
-  if (e.data?.type === 'PULSE_DRAG_START') {
+  if (e.data?.type === 'DRAG_START') {
     container.startDrag(e.data.x, e.data.y);
   }
 });
@@ -379,10 +379,10 @@ When in `floating` mode, the library automatically saves position and size to `s
 
 | Key | Value |
 |---|---|
-| `pulse:fc:x` | Left position (px) |
-| `pulse:fc:y` | Top position (px) |
-| `pulse:fc:width` | Width (px) |
-| `pulse:fc:height` | Height (px) |
+| `fc:x` | Left position (px) |
+| `fc:y` | Top position (px) |
+| `fc:width` | Width (px) |
+| `fc:height` | Height (px) |
 
 **Expanded state is never saved to session.**
 If the user expands the panel, drags it, or resizes it while expanded, none of those changes are written to session storage. The session always reflects the panel's pre-expand state. On reload, the panel opens at the normal (non-expanded) position and size regardless of what the user did while expanded.
@@ -391,7 +391,7 @@ If the user expands the panel, drags it, or resizes it while expanded, none of t
 
 ```js
 ['x', 'y', 'width', 'height'].forEach(k =>
-  sessionStorage.removeItem(`pulse:fc:${k}`)
+  sessionStorage.removeItem(`fc:${k}`)
 );
 ```
 
@@ -446,7 +446,7 @@ After collapsing from expanded view, the panel returns to the **exact** position
 ### Vanilla DOM
 
 ```ts
-import { FloatingContainer } from '@lsq/floating-container';
+import { FloatingContainer } from '@indiavenkatesh/floating-container';
 
 const container = new FloatingContainer({
   position: { anchor: 'bottom-right', x: 20, y: 20 },
@@ -467,7 +467,7 @@ container.open();
 ### React
 
 ```tsx
-import { FloatingContainer, MountAdapter } from '@lsq/floating-container';
+import { FloatingContainer, MountAdapter } from '@indiavenkatesh/floating-container';
 import { createRoot, Root } from 'react-dom/client';
 import { App } from './App';
 
@@ -500,7 +500,7 @@ container.open();
 ### Preact
 
 ```tsx
-import { FloatingContainer, MountAdapter } from '@lsq/floating-container';
+import { FloatingContainer, MountAdapter } from '@indiavenkatesh/floating-container';
 import { render } from 'preact';
 import { App } from './App';
 
@@ -603,10 +603,10 @@ const container = new FloatingContainer({
 Create one instance and reuse it across open/close cycles rather than creating a new one per interaction:
 
 ```ts
-// pulse.ts
-import { FloatingContainer } from '@lsq/floating-container';
+// container.ts
+import { FloatingContainer } from '@indiavenkatesh/floating-container';
 
-export const pulseContainer = new FloatingContainer({
+export const container = new FloatingContainer({
   mode:       'floating',
   position:   { anchor: 'bottom-right', x: 20, y: 20 },
   dimensions: { width: 280, height: 500 },
@@ -615,8 +615,8 @@ export const pulseContainer = new FloatingContainer({
 
 ```ts
 // button click handler
-import { pulseContainer } from './pulse';
-pulseContainer.toggle();
+import { container } from './container';
+container.toggle();
 ```
 
 ---

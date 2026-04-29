@@ -1,10 +1,10 @@
 /**
- * @lsq/mfe-remote/web-components
+ * @indiavenkatesh/mfe-remote/web-components
  *
  * Web Components (Custom Elements) adapter for use in remote MFEs.
  *
  * Usage (remote MFE):
- *   import { createWebComponentAdapter } from '@lsq/mfe-remote/web-components';
+ *   import { createWebComponentAdapter } from '@indiavenkatesh/mfe-remote/web-components';
  *
  *   // Option A — tag already defined elsewhere:
  *   export const adapter = createWebComponentAdapter('my-widget');
@@ -13,11 +13,11 @@
  *   export const adapter = createWebComponentAdapter('my-widget', MyWidgetElement);
  *
  * Usage (host):
- *   import { loadMicrofrontend } from '@lsq/mfe-host';
+ *   import { loadMicrofrontend } from '@indiavenkatesh/mfe-host';
  *   const load = loadMicrofrontend(adapter);
  */
 
-import type { MountAdapter } from '@lsq/mfe-host';
+import type { MountAdapter } from '@indiavenkatesh/mfe-host';
 
 import type { WebComponentProps, HandleResolver } from './types';
 export type { WebComponentProps, HandleResolver } from './types';
@@ -37,9 +37,9 @@ export type { WebComponentProps, HandleResolver } from './types';
  *
  * @example
  * export const adapter = createWebComponentAdapter(
- *   'pulse-ai-button',
- *   PulseAIButtonElement,
- *   (hostEl) => (hostEl.firstElementChild as PulseAIButtonElement)?.api,
+ *   'my-widget',
+ *   MyWidgetElement,
+ *   (hostEl) => (hostEl.firstElementChild as MyWidgetElement)?.api,
  * );
  */
 export function createWebComponentAdapter<

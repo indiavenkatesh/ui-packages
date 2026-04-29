@@ -1,6 +1,6 @@
 {
   "name": "@indiavenkatesh/automation-ids",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Utility functions for generating automation IDs consistently across applications",
   "type": "module",
   "main": "./dist/automation-ids.umd.cjs",

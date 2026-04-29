@@ -1,21 +1,21 @@
 /**
- * @lsq/mfe-remote/react
+ * @indiavenkatesh/mfe-remote/react
  *
  * React 18 adapter for use in remote MFEs.
  *
  * Usage (remote MFE):
- *   import { createReactAdapter } from '@lsq/mfe-remote/react';
+ *   import { createReactAdapter } from '@indiavenkatesh/mfe-remote/react';
  *   export const adapter = createReactAdapter(MyComponent);
  *
  * Usage (host):
- *   import { loadMicrofrontend } from '@lsq/mfe-host';
+ *   import { loadMicrofrontend } from '@indiavenkatesh/mfe-host';
  *   const load = loadMicrofrontend(adapter);
  */
 
 import { createElement, type ComponentType } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { flushSync } from 'react-dom';
-import type { MountAdapter, WithReady } from '@lsq/mfe-host';
+import type { MountAdapter, WithReady } from '@indiavenkatesh/mfe-host';
 
 /**
  * Build a MountAdapter that renders a React 18 component into a host element.

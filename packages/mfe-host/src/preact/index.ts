@@ -31,7 +31,7 @@ type SourceProps<TProps extends object, THandle> =
        * Module Federation module ID to load the adapter from at runtime.
        * The remote must be registered via `registerRemotes` before rendering,
        * or provide `remoteEntry` to register it automatically.
-       * @example 'pulseAI/adapter'
+       * @example 'myApp/adapter'
        */
       moduleId: string;
       /** Named export that holds the MountAdapter. @default 'adapter' */
@@ -41,7 +41,7 @@ type SourceProps<TProps extends object, THandle> =
        * When provided, the remote is registered automatically via `registerRemotes`
        * before loading — no need to pre-register at app bootstrap.
        * The remote name is derived from the first segment of `moduleId`.
-       * @example 'https://cdn.example.com/pulse-ai/mf-manifest.json'
+       * @example 'https://cdn.example.com/my-app/mf-manifest.json'
        */
       remoteEntry?: string;
       adapter?: never;
@@ -80,7 +80,7 @@ export type MicrofrontendHostProps<TProps extends object, THandle = void> =
  * @example — with MF remote
  * ```ts
  * h(MicrofrontendHost, {
- *   moduleId: 'pulseAI/adapter',
+ *   moduleId: 'myApp/adapter',
  *   loading:  h(Spinner, null),
  *   error:    ErrorBanner,          // ComponentType<{ error: Error }>
  *   onError:  (err) => log(err),

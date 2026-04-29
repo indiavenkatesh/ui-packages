@@ -1,19 +1,19 @@
 /**
- * @lsq/mfe-remote/preact
+ * @indiavenkatesh/mfe-remote/preact
  *
  * Preact adapter for use in remote MFEs.
  *
  * Usage (remote MFE):
- *   import { createPreactAdapter } from '@lsq/mfe-remote/preact';
+ *   import { createPreactAdapter } from '@indiavenkatesh/mfe-remote/preact';
  *   export const adapter = createPreactAdapter(MyComponent);
  *
  * Usage (host):
- *   import { loadMicrofrontend } from '@lsq/mfe-host';
+ *   import { loadMicrofrontend } from '@indiavenkatesh/mfe-host';
  *   const load = loadMicrofrontend(adapter);
  */
 
 import { render, h, type ComponentType } from 'preact';
-import type { MountAdapter, WithReady } from '@lsq/mfe-host';
+import type { MountAdapter, WithReady } from '@indiavenkatesh/mfe-host';
 
 /**
  * Build a MountAdapter that renders a Preact component into a host element.
@@ -23,7 +23,7 @@ import type { MountAdapter, WithReady } from '@lsq/mfe-host';
  * @param onBootstrap - Optional one-time initialisation callback.
  *
  * @example
- * export const adapter = createPreactAdapter(PulseAIButton);
+ * export const adapter = createPreactAdapter(MyComponent);
  */
 export function createPreactAdapter<
   TProps extends object,

@@ -1,5 +1,11 @@
 # @lsq/mfe-host
 
+## 0.0.1
+
+### Patch Changes
+
+- Remove company-specific branding: rename CSS classes (`lsq-fc-*` → `fc-*`), storage key prefix (`pulse:fc:` → `fc:`), and update all import paths and docs to use the `@indiavenkatesh` scope
+
 ## 0.2.2
 
 ### Patch Changes

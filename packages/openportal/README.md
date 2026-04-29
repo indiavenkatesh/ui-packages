@@ -1,4 +1,4 @@
-# @lsq/openportal
+# @indiavenkatesh/openportal
 
 A Preact-based portal manager that lets you render components outside the current component tree — into any DOM node, or directly into `document.body`. Useful for modals, toasts, tooltips, drawers, and any UI that needs to escape overflow or stacking context constraints.
 
@@ -42,16 +42,16 @@ Normally in Preact (and React), components render inside their parent's DOM subt
 
 A **portal** solves this by rendering a component into a separate DOM node that lives outside the current tree — typically appended directly to `document.body`.
 
-`@lsq/openportal` manages this process: creating the DOM node, rendering the Preact component into it, keeping props in sync, and cleaning everything up on close.
+`@indiavenkatesh/openportal` manages this process: creating the DOM node, rendering the Preact component into it, keeping props in sync, and cleaning everything up on close.
 
 ---
 
 ## Installation
 
 ```bash
-npm install @lsq/openportal
+npm install @indiavenkatesh/openportal
 # or
-pnpm add @lsq/openportal
+pnpm add @indiavenkatesh/openportal
 ```
 
 `preact` must be installed in your project (it is a peer dependency):
@@ -66,7 +66,7 @@ npm install preact
 
 ```ts
 import { h, ComponentType } from 'preact';
-import { openPortal, closePortal } from '@lsq/openportal';
+import { openPortal, closePortal } from '@indiavenkatesh/openportal';
 
 // 1. Define a Preact component to render in the portal
 const MyModal: ComponentType<{ title: string }> = ({ title }) => (
@@ -282,7 +282,7 @@ function cleanupPortalElement(id: string): void
 A `Map<string, { element: HTMLElement; container: HTMLElement }>` that tracks the raw DOM nodes for every open portal. Keyed by portal ID.
 
 ```ts
-import { portalElements } from '@lsq/openportal';
+import { portalElements } from '@indiavenkatesh/openportal';
 
 const entry = portalElements.get('my-modal');
 // entry.element   → the <div> the component is rendered into
@@ -296,7 +296,7 @@ const entry = portalElements.get('my-modal');
 ## Types
 
 ```ts
-import type { PortalEntry } from '@lsq/openportal';
+import type { PortalEntry } from '@indiavenkatesh/openportal';
 
 interface PortalEntry {
   id: string;
@@ -317,7 +317,7 @@ Your component will also automatically receive a `portalIndex: number` prop at r
 
 ```tsx
 import { h } from 'preact';
-import { openPortal, closePortal } from '@lsq/openportal';
+import { openPortal, closePortal } from '@indiavenkatesh/openportal';
 
 interface ModalProps {
   title: string;
@@ -350,7 +350,7 @@ openPortal('confirm-modal', Modal, {
 
 ```tsx
 import { h } from 'preact';
-import { openPortal, closePortal } from '@lsq/openportal';
+import { openPortal, closePortal } from '@indiavenkatesh/openportal';
 
 interface ToastProps {
   message: string;
@@ -388,7 +388,7 @@ By default portals attach to `document.body`. You can target any element instead
 
 ```tsx
 import { h } from 'preact';
-import { openPortal, closePortal } from '@lsq/openportal';
+import { openPortal, closePortal } from '@indiavenkatesh/openportal';
 
 const Drawer = ({ title }: { title: string }) => (
   <aside class="drawer">
@@ -411,7 +411,7 @@ The portal's `<div>` is appended inside `#sidebar` instead of `document.body`.
 If you need to change what a portal is showing without closing and reopening it, use `updatePortal`:
 
 ```ts
-import { openPortal, updatePortal, closePortal } from '@lsq/openportal';
+import { openPortal, updatePortal, closePortal } from '@indiavenkatesh/openportal';
 
 // Open with initial props
 openPortal('status-banner', Banner, { status: 'loading', message: 'Fetching data…' });
@@ -433,7 +433,7 @@ closePortal('status-banner');
 Namespaces let you close a logical group of portals with a single call:
 
 ```ts
-import { openPortal, clearPortalsByNamespace } from '@lsq/openportal';
+import { openPortal, clearPortalsByNamespace } from '@indiavenkatesh/openportal';
 
 // Open several portals under the same namespace
 openPortal('tooltip-a', Tooltip, { text: 'Help text A' }, undefined, 'tooltips');

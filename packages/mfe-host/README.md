@@ -1,4 +1,4 @@
-# @lsq/mfe-host
+# @indiavenkatesh/mfe-host
 
 Host-side loader for microfrontends. Bootstraps a remote adapter once and mounts it on demand.
 
@@ -7,7 +7,7 @@ Host-side loader for microfrontends. Bootstraps a remote adapter once and mounts
 ## Installation
 
 ```bash
-npm install @lsq/mfe-host
+npm install @indiavenkatesh/mfe-host
 ```
 
 ---
@@ -16,19 +16,19 @@ npm install @lsq/mfe-host
 
 | Import | Purpose |
 |--------|---------|
-| `@lsq/mfe-host` | Core imperative API — `loadMicrofrontend`, shared types |
-| `@lsq/mfe-host/preact` | Preact component + Module Federation hook |
+| `@indiavenkatesh/mfe-host` | Core imperative API — `loadMicrofrontend`, shared types |
+| `@indiavenkatesh/mfe-host/preact` | Preact component + Module Federation hook |
 
 ---
 
-## Core API — `@lsq/mfe-host`
+## Core API — `@indiavenkatesh/mfe-host`
 
 ### `loadMicrofrontend(adapter)`
 
 Creates a `load` function bound to the given adapter. Bootstrap runs **once** per `loadMicrofrontend()` call regardless of how many times `load()` is called.
 
 ```ts
-import { loadMicrofrontend } from '@lsq/mfe-host';
+import { loadMicrofrontend } from '@indiavenkatesh/mfe-host';
 
 const load = loadMicrofrontend(remoteAdapter);
 
@@ -95,7 +95,7 @@ type WithReady<THandle> = {
 
 ---
 
-## Preact API — `@lsq/mfe-host/preact`
+## Preact API — `@indiavenkatesh/mfe-host/preact`
 
 Peer dependencies:
 
@@ -111,7 +111,7 @@ Preact component that mounts a microfrontend into a `<div>` container. Accepts e
 
 ```ts
 import { h } from 'preact';
-import { MicrofrontendHost } from '@lsq/mfe-host/preact';
+import { MicrofrontendHost } from '@indiavenkatesh/mfe-host/preact';
 
 // Mode A — pre-loaded adapter
 h(MicrofrontendHost, {
@@ -122,7 +122,7 @@ h(MicrofrontendHost, {
 
 // Mode B — Module Federation remote ID
 h(MicrofrontendHost, {
-  moduleId:  'pulseAI/adapter',   // '<remoteName>/<exposedModule>'
+  moduleId:  'myApp/adapter',   // '<remoteName>/<exposedModule>'
   props:     { theme: 'dark' },
   loading:   h(Spinner, null),    // shown while adapter loads
   error:     ErrorBanner,         // ComponentType<{ error: Error }>
@@ -160,19 +160,19 @@ Register all remotes **once at app bootstrap** before rendering:
 import { registerRemotes } from '@module-federation/enhanced/runtime';
 
 registerRemotes([
-  { name: 'pulseAI',  entry: 'https://cdn.example.com/pulse-ai/remoteEntry.js' },
-  { name: 'converse', entry: 'https://cdn.example.com/converse/remoteEntry.js' },
+  { name: 'myApp',  entry: 'https://cdn.example.com/my-app/remoteEntry.js' },
+  { name: 'myRemote', entry: 'https://cdn.example.com/myRemote/remoteEntry.js' },
 ]);
 ```
 
 Then use the hook anywhere:
 
 ```ts
-import { useRemoteAdapter, MicrofrontendHost } from '@lsq/mfe-host/preact';
+import { useRemoteAdapter, MicrofrontendHost } from '@indiavenkatesh/mfe-host/preact';
 
-function PulseAIWidget() {
+function MyAppWidget() {
   const { adapter, loading, error } = useRemoteAdapter({
-    moduleId: 'pulseAI/adapter',
+    moduleId: 'myApp/adapter',
   });
 
   if (loading) return h('span', null, 'Loading…');
@@ -206,7 +206,7 @@ function PulseAIWidget() {
 
 ```ts
 // src/adapter.ts — exposed as './adapter' in MF config
-import { createPreactAdapter } from '@lsq/mfe-remote/preact';
+import { createPreactAdapter } from '@indiavenkatesh/mfe-remote/preact';
 import { MyComponent } from './MyComponent';
 
 export const adapter = createPreactAdapter(MyComponent);
@@ -217,7 +217,7 @@ export const adapter = createPreactAdapter(MyComponent);
 const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
 
 new ModuleFederationPlugin({
-  name: 'pulseAI',
+  name: 'myApp',
   filename: 'remoteEntry.js',
   exposes: { './adapter': './src/adapter.ts' },
   shared: { preact: { singleton: true } },
@@ -242,20 +242,20 @@ new ModuleFederationPlugin({
 
 ```
 Host app
-  ├── loadMicrofrontend(adapter)          ← @lsq/mfe-host (imperative)
+  ├── loadMicrofrontend(adapter)          ← @indiavenkatesh/mfe-host (imperative)
   │     └── load(el, props)
   │           ├── adapter.bootstrap()     (once)
   │           ├── adapter.mount(el, props)
   │           └── MicrofrontendInstance { unmount, update, handle }
   │
-  └── MicrofrontendHost / useRemoteAdapter  ← @lsq/mfe-host/preact (declarative)
+  └── MicrofrontendHost / useRemoteAdapter  ← @indiavenkatesh/mfe-host/preact (declarative)
         └── loadRemote('remoteName/adapter') via @module-federation/enhanced/runtime
               └── loadMicrofrontend(adapter)(el, props)
 
 Remote MFE
-  ├── createReactAdapter(MyComponent)    ← @lsq/mfe-remote/react
-  ├── createPreactAdapter(MyComponent)   ← @lsq/mfe-remote/preact
-  └── createWebComponentAdapter(tag)     ← @lsq/mfe-remote/web-components
+  ├── createReactAdapter(MyComponent)    ← @indiavenkatesh/mfe-remote/react
+  ├── createPreactAdapter(MyComponent)   ← @indiavenkatesh/mfe-remote/preact
+  └── createWebComponentAdapter(tag)     ← @indiavenkatesh/mfe-remote/web-components
 ```
 
-The host only depends on `@lsq/mfe-host`. The remote only depends on `@lsq/mfe-remote`. The `MountAdapter` type is the shared contract between them.
+The host only depends on `@indiavenkatesh/mfe-host`. The remote only depends on `@indiavenkatesh/mfe-remote`. The `MountAdapter` type is the shared contract between them.

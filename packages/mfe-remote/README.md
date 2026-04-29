@@ -1,13 +1,13 @@
-# @lsq/mfe-remote
+# @indiavenkatesh/mfe-remote
 
-Framework adapters for remote MFEs. Each adapter implements the `MountAdapter` contract from `@lsq/mfe-host` so the host can mount, update, and unmount your component without knowing its framework.
+Framework adapters for remote MFEs. Each adapter implements the `MountAdapter` contract from `@indiavenkatesh/mfe-host` so the host can mount, update, and unmount your component without knowing its framework.
 
 ---
 
 ## Installation
 
 ```bash
-npm install @lsq/mfe-remote
+npm install @indiavenkatesh/mfe-remote
 ```
 
 Peer dependencies (install only what you use):
@@ -21,13 +21,13 @@ npm install preact              # for /preact
 
 ## Adapters
 
-### React — `@lsq/mfe-remote/react`
+### React — `@indiavenkatesh/mfe-remote/react`
 
 Uses React 18 `createRoot` with `flushSync` so imperative handles are available synchronously after mount.
 
 ```ts
-import { createReactAdapter } from '@lsq/mfe-remote/react';
-import { loadMicrofrontend } from '@lsq/mfe-host';
+import { createReactAdapter } from '@indiavenkatesh/mfe-remote/react';
+import { loadMicrofrontend } from '@indiavenkatesh/mfe-host';
 
 // Remote MFE — export the adapter
 export const adapter = createReactAdapter(MyComponent);
@@ -48,10 +48,10 @@ function createReactAdapter<TProps extends object, THandle = void>(
 
 ---
 
-### Preact — `@lsq/mfe-remote/preact`
+### Preact — `@indiavenkatesh/mfe-remote/preact`
 
 ```ts
-import { createPreactAdapter } from '@lsq/mfe-remote/preact';
+import { createPreactAdapter } from '@indiavenkatesh/mfe-remote/preact';
 
 export const adapter = createPreactAdapter(MyComponent);
 ```
@@ -67,12 +67,12 @@ function createPreactAdapter<TProps extends object, THandle = void>(
 
 ---
 
-### Web Components — `@lsq/mfe-remote/web-components`
+### Web Components — `@indiavenkatesh/mfe-remote/web-components`
 
 Appends a custom element into the host element and applies props as DOM **properties** (not attributes), so rich values (objects, arrays, functions) are passed correctly.
 
 ```ts
-import { createWebComponentAdapter } from '@lsq/mfe-remote/web-components';
+import { createWebComponentAdapter } from '@indiavenkatesh/mfe-remote/web-components';
 
 // Option A — tag already registered elsewhere
 export const adapter = createWebComponentAdapter('my-widget');
@@ -111,7 +111,7 @@ function createWebComponentAdapter<
 To expose an imperative API from your component, use the `WithReady` mixin. The adapter injects `onReady` automatically — call it inside `useLayoutEffect` (React) or during mount (Preact) to ensure synchronous delivery.
 
 ```tsx
-import type { WithReady } from '@lsq/mfe-host';
+import type { WithReady } from '@indiavenkatesh/mfe-host';
 
 type Handle = { focus(): void };
 type Props  = WithReady<Handle> & { label: string };
@@ -145,4 +145,4 @@ instance.handle?.focus();
 | `WebComponentProps` | `Record<string, unknown>` — props applied as DOM properties |
 | `HandleResolver<THandle>` | `(hostEl: Element) => THandle \| undefined` — resolves handle from host element |
 
-Both are re-exported from `@lsq/mfe-remote/web-components`.
+Both are re-exported from `@indiavenkatesh/mfe-remote/web-components`.

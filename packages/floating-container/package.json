@@ -1,6 +1,6 @@
 {
   "name": "@indiavenkatesh/floating-container",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Zero-dependency TypeScript library that creates and manages a floating/embedded container shell.",
   "type": "module",
   "files": [

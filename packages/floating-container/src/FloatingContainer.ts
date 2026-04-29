@@ -21,8 +21,8 @@ import { MountManager }    from './MountManager';
 // Keeps the library as a single JS file with no external CSS dependency.
 
 const SHELL_CSS = `
-/* @lsq-pulse/floating-container shell styles */
-.lsq-fc {
+/* floating-container shell styles */
+.fc {
   position: fixed;
   box-sizing: border-box;
   border-radius: 16px;
@@ -34,17 +34,17 @@ const SHELL_CSS = `
   min-width: 0;
   min-height: 0;
 }
-.lsq-fc[data-hidden] { display: none !important; }
-.lsq-fc[data-mode="embedded"] {
+.fc[data-hidden] { display: none !important; }
+.fc[data-mode="embedded"] {
   position: absolute !important;
   left: 0 !important; top: 0 !important;
   width: 100% !important; height: 100% !important;
   border-radius: 0;
   box-shadow: none;
 }
-.lsq-fc[data-minimized] { overflow: hidden; }
-.lsq-fc[data-minimized] .lsq-fc-mount-point { pointer-events: none; }
-.lsq-fc-mount-point {
+.fc[data-minimized] { overflow: hidden; }
+.fc[data-minimized] .fc-mount-point { pointer-events: none; }
+.fc-mount-point {
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -52,73 +52,73 @@ const SHELL_CSS = `
   flex-direction: column;
   z-index: 0;
 }
-.lsq-fc-resize-right,
-.lsq-fc-resize-left,
-.lsq-fc-resize-bottom,
-.lsq-fc-resize-top,
-.lsq-fc-resize-corner,
-.lsq-fc-resize-top-left,
-.lsq-fc-resize-top-right,
-.lsq-fc-resize-bottom-left { position: absolute; z-index: 1; background: transparent; }
-.lsq-fc-resize-right       { right: 0;  top: 0;    width: 6px;  height: 100%; cursor: ew-resize; }
-.lsq-fc-resize-left        { left: 0;   top: 0;    width: 6px;  height: 100%; cursor: ew-resize; }
-.lsq-fc-resize-bottom      { bottom: 0; left: 0;   width: 100%; height: 6px;  cursor: ns-resize; }
-.lsq-fc-resize-top         { top: 0;    left: 0;   width: 100%; height: 6px;  cursor: ns-resize; }
-.lsq-fc-resize-corner      { right: 0;  bottom: 0; width: 12px; height: 12px; cursor: nwse-resize; z-index: 2; }
-.lsq-fc-resize-top-left    { left: 0;   top: 0;    width: 12px; height: 12px; cursor: nwse-resize; z-index: 2; }
-.lsq-fc-resize-top-right   { right: 0;  top: 0;    width: 12px; height: 12px; cursor: nesw-resize; z-index: 2; }
-.lsq-fc-resize-bottom-left { left: 0;   bottom: 0; width: 12px; height: 12px; cursor: nesw-resize; z-index: 2; }
+.fc-resize-right,
+.fc-resize-left,
+.fc-resize-bottom,
+.fc-resize-top,
+.fc-resize-corner,
+.fc-resize-top-left,
+.fc-resize-top-right,
+.fc-resize-bottom-left { position: absolute; z-index: 1; background: transparent; }
+.fc-resize-right       { right: 0;  top: 0;    width: 6px;  height: 100%; cursor: ew-resize; }
+.fc-resize-left        { left: 0;   top: 0;    width: 6px;  height: 100%; cursor: ew-resize; }
+.fc-resize-bottom      { bottom: 0; left: 0;   width: 100%; height: 6px;  cursor: ns-resize; }
+.fc-resize-top         { top: 0;    left: 0;   width: 100%; height: 6px;  cursor: ns-resize; }
+.fc-resize-corner      { right: 0;  bottom: 0; width: 12px; height: 12px; cursor: nwse-resize; z-index: 2; }
+.fc-resize-top-left    { left: 0;   top: 0;    width: 12px; height: 12px; cursor: nwse-resize; z-index: 2; }
+.fc-resize-top-right   { right: 0;  top: 0;    width: 12px; height: 12px; cursor: nesw-resize; z-index: 2; }
+.fc-resize-bottom-left { left: 0;   bottom: 0; width: 12px; height: 12px; cursor: nesw-resize; z-index: 2; }
 @media (pointer: coarse) {
-  .lsq-fc-resize-right  { width: 12px; }
-  .lsq-fc-resize-left   { width: 12px; }
-  .lsq-fc-resize-bottom { height: 12px; }
-  .lsq-fc-resize-top    { height: 12px; }
-  .lsq-fc-resize-corner,
-  .lsq-fc-resize-top-left,
-  .lsq-fc-resize-top-right,
-  .lsq-fc-resize-bottom-left { width: 44px; height: 44px; }
+  .fc-resize-right  { width: 12px; }
+  .fc-resize-left   { width: 12px; }
+  .fc-resize-bottom { height: 12px; }
+  .fc-resize-top    { height: 12px; }
+  .fc-resize-corner,
+  .fc-resize-top-left,
+  .fc-resize-top-right,
+  .fc-resize-bottom-left { width: 44px; height: 44px; }
 }
-.lsq-fc-resize-right:hover,
-.lsq-fc-resize-left:hover,
-.lsq-fc-resize-bottom:hover,
-.lsq-fc-resize-top:hover,
-.lsq-fc-resize-corner:hover,
-.lsq-fc-resize-top-left:hover,
-.lsq-fc-resize-top-right:hover,
-.lsq-fc-resize-bottom-left:hover { background: rgba(0,0,0,.06); }
-.lsq-fc[data-mode="embedded"] .lsq-fc-resize-right,
-.lsq-fc[data-mode="embedded"] .lsq-fc-resize-left,
-.lsq-fc[data-mode="embedded"] .lsq-fc-resize-bottom,
-.lsq-fc[data-mode="embedded"] .lsq-fc-resize-top,
-.lsq-fc[data-mode="embedded"] .lsq-fc-resize-corner,
-.lsq-fc[data-mode="embedded"] .lsq-fc-resize-top-left,
-.lsq-fc[data-mode="embedded"] .lsq-fc-resize-top-right,
-.lsq-fc[data-mode="embedded"] .lsq-fc-resize-bottom-left,
-.lsq-fc[data-minimized] .lsq-fc-resize-right,
-.lsq-fc[data-minimized] .lsq-fc-resize-left,
-.lsq-fc[data-minimized] .lsq-fc-resize-bottom,
-.lsq-fc[data-minimized] .lsq-fc-resize-top,
-.lsq-fc[data-minimized] .lsq-fc-resize-corner,
-.lsq-fc[data-minimized] .lsq-fc-resize-top-left,
-.lsq-fc[data-minimized] .lsq-fc-resize-top-right,
-.lsq-fc[data-minimized] .lsq-fc-resize-bottom-left { display: none; }
-.lsq-fc-entering {
-  animation: lsq-fc-enter var(--lsq-fc-anim-dur, 200ms) ease-out both;
+.fc-resize-right:hover,
+.fc-resize-left:hover,
+.fc-resize-bottom:hover,
+.fc-resize-top:hover,
+.fc-resize-corner:hover,
+.fc-resize-top-left:hover,
+.fc-resize-top-right:hover,
+.fc-resize-bottom-left:hover { background: rgba(0,0,0,.06); }
+.fc[data-mode="embedded"] .fc-resize-right,
+.fc[data-mode="embedded"] .fc-resize-left,
+.fc[data-mode="embedded"] .fc-resize-bottom,
+.fc[data-mode="embedded"] .fc-resize-top,
+.fc[data-mode="embedded"] .fc-resize-corner,
+.fc[data-mode="embedded"] .fc-resize-top-left,
+.fc[data-mode="embedded"] .fc-resize-top-right,
+.fc[data-mode="embedded"] .fc-resize-bottom-left,
+.fc[data-minimized] .fc-resize-right,
+.fc[data-minimized] .fc-resize-left,
+.fc[data-minimized] .fc-resize-bottom,
+.fc[data-minimized] .fc-resize-top,
+.fc[data-minimized] .fc-resize-corner,
+.fc[data-minimized] .fc-resize-top-left,
+.fc[data-minimized] .fc-resize-top-right,
+.fc[data-minimized] .fc-resize-bottom-left { display: none; }
+.fc-entering {
+  animation: fc-enter var(--fc-anim-dur, 200ms) ease-out both;
 }
-.lsq-fc-leaving {
-  animation: lsq-fc-leave var(--lsq-fc-anim-dur, 200ms) ease-in both;
+.fc-leaving {
+  animation: fc-leave var(--fc-anim-dur, 200ms) ease-in both;
 }
-@keyframes lsq-fc-enter {
+@keyframes fc-enter {
   from { opacity: 0; transform: translateY(12px) scale(.97); }
   to   { opacity: 1; transform: translateY(0)    scale(1);   }
 }
-@keyframes lsq-fc-leave {
+@keyframes fc-leave {
   from { opacity: 1; transform: translateY(0)    scale(1);   }
   to   { opacity: 0; transform: translateY(12px) scale(.97); }
 }
 `;
 
-const STYLE_ID = 'lsq-fc-styles';
+const STYLE_ID = 'fc-styles';
 
 function ensureCSS(): void {
   if (document.getElementById(STYLE_ID)) return;
@@ -149,7 +149,7 @@ const DEFAULT_DIMENSIONS: IDimensionOptions = {
   expandedHeight: '80vh',
 };
 
-const STORAGE_KEY_PREFIX = 'pulse:fc:';
+const STORAGE_KEY_PREFIX = 'fc:';
 
 // ═════════════════════════════════════════════════════════════════════════
 // FloatingContainer — public class
@@ -166,7 +166,7 @@ const STORAGE_KEY_PREFIX = 'pulse:fc:';
  *
  * @example
  * ```ts
- * import { FloatingContainer } from '@lsq-pulse/floating-container';
+ * import { FloatingContainer } from '@indiavenkatesh/floating-container';
  *
  * const container = new FloatingContainer({
  *   mode: 'floating',
@@ -260,7 +260,7 @@ export class FloatingContainer {
 
     // ── Build host + shell ───────────────────────────────────────────────
     this.hostEl = document.createElement('div');
-    this.hostEl.className = 'lsq-fc-host';
+    this.hostEl.className = 'fc-host';
 
     if (this.cfg.shadowDom) {
       this.shadowRoot = this.hostEl.attachShadow({ mode: 'open' });
@@ -274,13 +274,13 @@ export class FloatingContainer {
       this.hostEl.appendChild(this.shellEl);
     }
 
-    this.shellEl.className = 'lsq-fc';
+    this.shellEl.className = 'fc';
     this.shellEl.setAttribute('role', 'dialog');
     this.shellEl.setAttribute('aria-modal', 'false');
     this.shellEl.setAttribute('tabindex', '-1');
     this.shellEl.dataset['hidden'] = '';
     this.shellEl.dataset['mode']   = this.mode;
-    this.shellEl.style.setProperty('--lsq-fc-anim-dur', `${this.cfg.animationDuration}ms`);
+    this.shellEl.style.setProperty('--fc-anim-dur', `${this.cfg.animationDuration}ms`);
 
     // ── Mount point ──────────────────────────────────────────────────────
     this.mountMgr = new MountManager(
@@ -442,11 +442,11 @@ export class FloatingContainer {
   }
 
   private animate(direction: 'enter' | 'leave'): Promise<void> {
-    this.shellEl.classList.remove('lsq-fc-entering', 'lsq-fc-leaving');
+    this.shellEl.classList.remove('fc-entering', 'fc-leaving');
     return new Promise(resolve => {
       const dur = this.cfg.animationDuration;
       if (dur <= 0) { resolve(); return; }
-      const cls = direction === 'enter' ? 'lsq-fc-entering' : 'lsq-fc-leaving';
+      const cls = direction === 'enter' ? 'fc-entering' : 'fc-leaving';
       this.animating = true;
       this.shellEl.classList.add(cls);
       const cleanup = (): void => {
@@ -717,7 +717,7 @@ export class FloatingContainer {
 
   /**
    * Programmatically start a drag from viewport coordinates.
-   * Used to relay PULSE_DRAG_START postMessage from an iframe header.
+   * Used to relay DRAG_START postMessage from an iframe header.
    * @security Always validate event.origin before calling.
    */
   startDrag(x: number, y: number): void {

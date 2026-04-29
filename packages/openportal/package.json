@@ -1,6 +1,6 @@
 {
   "name": "@indiavenkatesh/openportal",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Preact portal manager — open, update, and close portals outside the component tree",
   "type": "module",
   "main": "./dist/openportal.umd.cjs",

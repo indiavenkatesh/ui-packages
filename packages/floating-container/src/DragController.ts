@@ -18,7 +18,7 @@ export interface IDragSetters {
  *
  * The drag handle element is registered externally via `setHandle(el)`.
  * Drag can also be initiated programmatically via `startDrag(x, y)`
- * (used to relay PULSE_DRAG_START postMessage events from an iframe).
+ * (used to relay DRAG_START postMessage events from an iframe).
  *
  * Position updates are RAF-throttled for 60 fps performance.
  * Arrow-key navigation (8 px step) is supported when the handle is focused.
@@ -67,7 +67,7 @@ export class DragController {
 
   /**
    * Programmatically begin a drag from the given viewport coordinates.
-   * Called by the host page when it receives a PULSE_DRAG_START postMessage
+   * Called by the host page when it receives a DRAG_START postMessage
    * from a cross-origin iframe header.
    */
   startDrag(clientX: number, clientY: number): void {

@@ -1,5 +1,11 @@
 # @lsq-pulse/floating-container
 
+## 0.0.1
+
+### Patch Changes
+
+- Remove company-specific branding: rename CSS classes (`lsq-fc-*` → `fc-*`), storage key prefix (`pulse:fc:` → `fc:`), and update all import paths and docs to use the `@indiavenkatesh` scope
+
 ## 1.0.0
 
 ### Major Changes

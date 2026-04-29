@@ -7,7 +7,7 @@ export type UseRemoteAdapterOptions = {
    * Module Federation module ID: `'<remoteName>/<exposedModule>'`.
    * Remotes must be registered beforehand via `registerRemotes` (once at app bootstrap),
    * or provide `remoteEntry` to register the remote on-the-fly.
-   * @example 'pulseAI/adapter'
+   * @example 'myApp/adapter'
    */
   moduleId: string;
   /**
@@ -20,7 +20,7 @@ export type UseRemoteAdapterOptions = {
    * When provided, the remote is registered automatically via `registerRemotes`
    * before loading — no need to call `registerRemotes` at app bootstrap.
    * The remote name is derived from the first segment of `moduleId`.
-   * @example 'https://cdn.example.com/pulse-ai/mf-manifest.json'
+   * @example 'https://cdn.example.com/my-app/mf-manifest.json'
    */
   remoteEntry?: string;
   /**
@@ -43,13 +43,13 @@ export type UseRemoteAdapterResult<TProps extends object, THandle = void> = {
  * ```ts
  * import { registerRemotes } from '@module-federation/enhanced/runtime';
  * registerRemotes([
- *   { name: 'pulseAI', entry: 'https://cdn.example.com/pulse-ai/remoteEntry.js' },
+ *   { name: 'myApp', entry: 'https://cdn.example.com/my-app/remoteEntry.js' },
  * ]);
  * ```
  *
  * Then use the hook anywhere:
  * ```ts
- * const { adapter, loading, error } = useRemoteAdapter({ moduleId: 'pulseAI/adapter' });
+ * const { adapter, loading, error } = useRemoteAdapter({ moduleId: 'myApp/adapter' });
  * ```
  */
 export function useRemoteAdapter<TProps extends object, THandle = void>({
