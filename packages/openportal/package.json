@@ -1,0 +1,34 @@
+{
+  "name": "@indiavenkatesh/openportal",
+  "version": "0.0.0",
+  "description": "Preact portal manager — open, update, and close portals outside the component tree",
+  "type": "module",
+  "main": "./dist/openportal.umd.cjs",
+  "module": "./dist/openportal.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/openportal.js",
+      "require": "./dist/openportal.umd.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && rspack --config rspack.config.cjs --mode production && tsc --emitDeclarationOnly",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "release:dev": "pnpm build && pnpm publish --tag dev --no-git-checks"
+  },
+  "peerDependencies": {
+    "preact": "^10.27.2"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^1.0.0",
+    "@rspack/core": "^1.0.0",
+    "preact": "^10.27.2",
+    "typescript": "^5.7.0"
+  }
+}

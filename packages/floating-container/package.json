@@ -1,0 +1,31 @@
+{
+  "name": "@indiavenkatesh/floating-container",
+  "version": "0.0.0",
+  "description": "Zero-dependency TypeScript library that creates and manages a floating/embedded container shell.",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/floating-container.umd.cjs",
+  "module": "./dist/floating-container.js",
+  "types": "./dist/floating-container.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/floating-container.d.ts",
+      "import": "./dist/floating-container.js",
+      "require": "./dist/floating-container.umd.cjs"
+    }
+  },
+  "scripts": {
+    "build": "rm -rf dist && rspack --config rspack.config.cjs --mode production && tsc --emitDeclarationOnly",
+    "dev": "rspack --config rspack.config.cjs --mode development --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "release:dev": "pnpm build && pnpm publish --tag dev --no-git-checks"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^1.0.0",
+    "@rspack/core": "^1.0.0",
+    "typescript": "^5.7.0"
+  }
+}

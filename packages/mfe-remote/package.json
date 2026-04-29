@@ -1,0 +1,72 @@
+{
+  "name": "@indiavenkatesh/mfe-remote",
+  "version": "0.0.0",
+  "description": "Framework adapters for remote MFEs (React, Preact, Web Components)",
+  "type": "module",
+  "exports": {
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react.js",
+      "require": "./dist/react.umd.cjs"
+    },
+    "./preact": {
+      "types": "./dist/preact/index.d.ts",
+      "import": "./dist/preact.js",
+      "require": "./dist/preact.umd.cjs"
+    },
+    "./web-components": {
+      "types": "./dist/web-components/index.d.ts",
+      "import": "./dist/web-components.js",
+      "require": "./dist/web-components.umd.cjs"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "react": [
+        "./dist/react/index.d.ts"
+      ],
+      "preact": [
+        "./dist/preact/index.d.ts"
+      ],
+      "web-components": [
+        "./dist/web-components/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && rspack --config rspack.config.cjs --mode production && tsc --emitDeclarationOnly",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "release:dev": "pnpm build && pnpm publish --tag dev --no-git-checks"
+  },
+  "peerDependencies": {
+    "preact": ">=10",
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "preact": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@indiavenkatesh/mfe-host": "workspace:*",
+    "@rspack/cli": "^1.0.0",
+    "@rspack/core": "^1.0.0",
+    "preact": "^10.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.7.0"
+  }
+}

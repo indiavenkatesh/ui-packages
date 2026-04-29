@@ -1,0 +1,56 @@
+{
+  "name": "@indiavenkatesh/mfe-host",
+  "version": "0.0.0",
+  "description": "Host-side loader for microfrontends",
+  "type": "module",
+  "main": "./dist/mfe-host.umd.cjs",
+  "module": "./dist/mfe-host.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/mfe-host.js",
+      "require": "./dist/mfe-host.umd.cjs"
+    },
+    "./preact": {
+      "types": "./dist/preact/index.d.ts",
+      "import": "./dist/preact.js",
+      "require": "./dist/preact.umd.cjs"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "preact": [
+        "./dist/preact/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && rspack --config rspack.config.cjs --mode production && tsc --emitDeclarationOnly",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "release:dev": "pnpm build && pnpm publish --tag dev --no-git-checks"
+  },
+  "peerDependencies": {
+    "@module-federation/enhanced": ">=0.6",
+    "preact": ">=10"
+  },
+  "peerDependenciesMeta": {
+    "@module-federation/enhanced": {
+      "optional": true
+    },
+    "preact": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@module-federation/enhanced": "^0.6.0",
+    "@rspack/cli": "^1.0.0",
+    "@rspack/core": "^1.0.0",
+    "preact": "^10.0.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@indiavenkatesh/automation-ids",
+  "version": "0.0.0",
+  "description": "Utility functions for generating automation IDs consistently across applications",
+  "type": "module",
+  "main": "./dist/automation-ids.umd.cjs",
+  "module": "./dist/automation-ids.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/automation-ids.js",
+      "require": "./dist/automation-ids.umd.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && rspack --config rspack.config.cjs --mode production && tsc --emitDeclarationOnly",
+    "typecheck": "tsc --noEmit",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^1.0.0",
+    "@rspack/core": "^1.0.0",
+    "typescript": "^5.7.0"
+  }
+}
